@@ -1,5 +1,5 @@
 <h1 align='center'>
-Malaria Detection app
+Malaria Detection app 🦠
 </h1>
 
 <p align='center'>
