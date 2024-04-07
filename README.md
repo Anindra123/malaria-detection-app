@@ -4,8 +4,8 @@ This is a live deployment of a machine learning model that i developed during my
 
 
 ## Screenshots
-
-![screenshot_1](screenshots/m2.png)
+![screenshot_1](screenshots/m1.png)
+![screenshot_2](screenshots/m2.png)
 
 
 ## Run Locally
