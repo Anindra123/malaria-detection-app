@@ -1,4 +1,12 @@
-# Malaria Cell Detection App
+<h1 align='center'>
+Malaria Detection app
+</h1>
+
+<p align='center'>
+<img src='https://img.shields.io/github/license/Ileriayo/markdown-badges?style=for-the-badge'/>
+<img src='https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white'/>
+<img src='https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white'/>
+</p>
 
 This is a live deployment of a machine learning model that i developed during my CS degree as a part of machine learning course. The link to the original model training code is [here](https://github.com/Anindra123/Ensemble-Malaria-Detection). The models were trained with ensemble learning and had a AUC score of 0.97. The app takes a cell image and predicts whether it parasitized or uninfected cell based on the parasitic lesion observed on the cell.The model was trained using reduced feature set by utilizing PCA. The full technical paper of the model training is given [here](https://drive.google.com/file/d/19owUJdk34yYclXhCIQXM0Zq7Eew1FViJ/view?usp=sharing).
 
