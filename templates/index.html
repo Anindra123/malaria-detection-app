@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='app.css')}}" />
+  <title>Malaria Detection App</title>
+</head>
+
+<body>
+  <div class="intput__field_heading">
+    <h1 class="inter-font-medium">Malaria Detection</h1>
+  </div>
+  {% if upload_state or prediction %}
+  <div class="nav_container">
+    <a class="nav_btn inter-font-semibold" href="/">&lt; Back to Home</a>
+  </div>
+  {% endif %}
+  <div class="input__field">
+
+    {% if upload_state %}
+    {% if upload_state != 'success' %}
+
+    <div class="error_container">
+      <p class="error_message inter-font-normal">Error uploading file</p>
+    </div>
+    {% endif %}
+    {% endif %}
+    <div class="input__field_main">
+      <form class="form_group" method="post" enctype="multipart/form-data" action="{{ form_route }}">
+        <div class="input_from_group">
+          {% if upload_state and upload_state == 'success' %}
+          <div class="input_form_text inter-font-normal">{{ image_file }}</div>
+          <button class="predict_button inter-font-semibold" type="submit">Predict</button>
+          {% elif prediction %}
+          <div class="input_form_text inter-font-normal">{{ image_file }}</div>
+          <button class="predict_button inter-font-semibold" style="pointer-events: none;" disabled
+            type="submit">Predict</button>
+          {% elif upload_state and uplod_state == 'error' %}
+          <input class="input_form" type="file" disabled accept=".jpg,.png,.jpeg" name="img_file" />
+          <button class="submit_button" disabled type="submit">Upload</button>
+          {% else %}
+          <input class="input_form" type="file" accept=".jpg,.png,.jpeg" name="img_file" />
+          <button class="submit_button" type="submit">Upload</button>
+          {% endif %}
+        </div>
+      </form>
+    </div>
+  </div>
+  {% if prediction %}
+  <div class="prediction_container">
+    <div class="image_container">
+      <img class="uploaded_image" src="{{image_url}}" alt="uploaded_file" width="400" height="400" />
+    </div>
+    <p>
+      <span class="inter-font-medium">Prediction result:</span>
+      {% if prediction == 'Parasitized' %}
+      <span class="inter-font-normal" style="color: red;">{{prediction}}</span>
+      {% else %}
+      <span class="inter-font-normal" style="color: green;">{{prediction}}</span>
+      {% endif %}
+    </p>
+
+  </div>
+  {% endif %}
+</body>
+
+</html>
