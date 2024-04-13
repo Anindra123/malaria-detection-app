@@ -10,60 +10,55 @@
 
 <body>
   <div class="intput__field_heading">
-    <h1 class="inter-font-medium">Malaria Detection</h1>
+    <h1 class="inter-font-medium">Malaria Detection 🦠</h1>
   </div>
-  {% if upload_state or prediction %}
-  <div class="nav_container">
-    <a class="nav_btn inter-font-semibold" href="/">&lt; Back to Home</a>
-  </div>
-  {% endif %}
-  <div class="input__field">
-
-    {% if upload_state %}
-    {% if upload_state != 'success' %}
-
-    <div class="error_container">
-      <p class="error_message inter-font-normal">Error uploading file</p>
+  <div class="error_block hidden" id="error">
+    <div class="error_text_container">
+      <p class="error_text inter-font-medium"></p>
     </div>
-    {% endif %}
-    {% endif %}
-    <div class="input__field_main">
-      <form class="form_group" method="post" enctype="multipart/form-data" action="{{ form_route }}">
-        <div class="input_from_group">
-          {% if upload_state and upload_state == 'success' %}
-          <div class="input_form_text inter-font-normal">{{ image_file }}</div>
-          <button class="predict_button inter-font-semibold" type="submit">Predict</button>
-          {% elif prediction %}
-          <div class="input_form_text inter-font-normal">{{ image_file }}</div>
-          <button class="predict_button inter-font-semibold" style="pointer-events: none;" disabled
-            type="submit">Predict</button>
-          {% elif upload_state and uplod_state == 'error' %}
-          <input class="input_form" type="file" disabled accept=".jpg,.png,.jpeg" name="img_file" />
-          <button class="submit_button" disabled type="submit">Upload</button>
-          {% else %}
-          <input class="input_form" type="file" accept=".jpg,.png,.jpeg" name="img_file" />
-          <button class="submit_button" type="submit">Upload</button>
-          {% endif %}
-        </div>
-      </form>
+    <div class="button_container">
+      <a href="#" class="close_error_box inter-font-medium" id="close_error">&#x2715;</a>
     </div>
   </div>
-  {% if prediction %}
-  <div class="prediction_container">
+  <div class="drag-n-drop-area">
+    <input type="file" id="file_input" accept=".jpeg,.png,.jpg">
+    <div class="drag-n-drop_drop_zone" id="drop-zone">
+      <div class="icon-container">
+        <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24"
+          style="fill: var(--text50)">
+          <path
+            d="M18.944 11.112C18.507 7.67 15.56 5 12 5 9.244 5 6.85 6.611 5.757 9.15 3.609 9.792 2 11.82 2 14c0 2.757 2.243 5 5 5h11c2.206 0 4-1.794 4-4a4.01 4.01 0 0 0-3.056-3.888zM13 14v3h-2v-3H8l4-5 4 5h-3z">
+          </path>
+        </svg>
+      </div>
+      <div class="text-container">
+        <p class="inter-font-bold">You can drag and drop an image file</p>
+        <a class="btn btn-primary btn-pill inter-font-medium" id="browse_file_btn">Browse files</a>
+      </div>
+    </div>
+
+  </div>
+  <div class="prediction_block hidden">
     <div class="image_container">
-      <img class="uploaded_image" src="{{image_url}}" alt="uploaded_file" width="400" height="400" />
-    </div>
-    <p>
-      <span class="inter-font-medium">Prediction result:</span>
-      {% if prediction == 'Parasitized' %}
-      <span class="inter-font-normal" style="color: red;">{{prediction}}</span>
-      {% else %}
-      <span class="inter-font-normal" style="color: green;">{{prediction}}</span>
-      {% endif %}
-    </p>
+      <img id="prediction_image" width="300" height="300" alt="upload_image" />
 
+    </div>
+    <div class="prediction_button_container" id="prediction_buttons">
+      <a class="btn btn-pill btn-primary inter-font-medium" id="predict_button">
+        Predict
+      </a>
+    </div>
+    <div class="result_container hidden" id="prediction_results">
+      <p class="prediction_result_text inter-font-medium" id="result_text">
+        <span class="inter-font-medium">Prediction Result:</span>
+      </p>
+      <a class="btn btn-pill btn-primary inter-font-medium" href="/">
+        Run new prediction
+      </a>
+    </div>
   </div>
-  {% endif %}
+
+  <script src="{{ url_for('static',filename='app.js') }}"></script>
 </body>
 
 </html>
